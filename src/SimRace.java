@@ -12,7 +12,7 @@ public class SimRace {
     }
 
     public static void main(String[] args) {
-        List<Car> autos= new ArrayList<>();
+        List<Car> autos= new ArrayList<>(); 
         Car auto1= new Car("Wagen 0");
         Car auto2= new Car("Wagen 1");
         Car auto3= new Car("Wagen 2");
