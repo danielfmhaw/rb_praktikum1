@@ -18,7 +18,7 @@ public class SimRace {
         Car auto4= new Car("Wagen 3");
         Car auto5= new Car("Wagen 4");
         ArrayList <Car>autos= new ArrayList<>( Arrays.asList(auto1,auto2,auto3,auto4,auto5));
-        SimRace test= new SimRace(10);
+        SimRace test= new SimRace(11);
         //SimRace test= new SimRace(10_000_000);
         test.autosAufBahn(autos);
     }
