@@ -12,18 +12,14 @@ public class SimRace {
     }
 
     public static void main(String[] args) {
-        List<Car> autos= new ArrayList<>(); 
         Car auto1= new Car("Wagen 0");
         Car auto2= new Car("Wagen 1");
         Car auto3= new Car("Wagen 2");
         Car auto4= new Car("Wagen 3");
         Car auto5= new Car("Wagen 4");
-        autos.add(auto1);
-        autos.add(auto2);
-        autos.add(auto3);
-        autos.add(auto4);
-        autos.add(auto5);
-        SimRace test= new SimRace(10_000_000);
+        ArrayList <Car>autos= new ArrayList<>( Arrays.asList(auto1,auto2,auto3,auto4,auto5));
+        SimRace test= new SimRace(10);
+        //SimRace test= new SimRace(10_000_000);
         test.autosAufBahn(autos);
     }
 
@@ -35,9 +31,12 @@ public class SimRace {
         for(int i=0;i<autos.size();i++){
             autos.get(i).start();
         }
+        long startTime = System.nanoTime();
+
         //Anzahl an Runden entsprechend oft neue Rundenzeit berechnen und warten
         for(int j=0;j<rundenanzahl;j++){
             for(int i=0;i<autos.size();i++){
+                //System.out.println(autos.get(i).getName());
                 try {
                     autos.get(i).sleep(autos.get(i).wartezeit);
                 } catch (InterruptedException e) {
@@ -47,20 +46,24 @@ public class SimRace {
             }
             //System.out.println("Runde "+j+" beendet");
         }
+        
         //Thread warten
-        for(int i=0;i<autos.size();i++){
-            try {
+        try {
+            for(int i=0;i<autos.size();i++){
                 autos.get(i).join();
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
             }
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
         }
+
+        long usedTime = (System.nanoTime() - startTime)/1000000;
+        System.out.println("Gesamtzeit beträgt: "+usedTime);
         konsolenAusgabe(autos);
     }
 
     private void konsolenAusgabe(List<Car> autos){
         Collections.sort(autos);
-
+        System.out.println("");
         System.out.println("****Endstand****");
         for(int i=0;i<autos.size();i++){
             System.out.println((i+1)+".Platz: "+autos.get(i).toString()+" Zeit:"+autos.get(i).gesamtzeit);

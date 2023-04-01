@@ -8,12 +8,9 @@ public class Car extends Thread implements Comparable {
     }
     @Override
     public void run() {
-        while (true) {
-            if (isInterrupted()) {
-                break;
-            }
+        if(!isInterrupted()){
+            //nothing
         }
-
     }
     public void setWartezeit(int wartezeit){
         this.wartezeit=wartezeit;
