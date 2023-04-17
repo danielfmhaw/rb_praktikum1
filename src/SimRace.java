@@ -1,11 +1,10 @@
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
 public class SimRace {
-    int  anzahl_Autos;
-    int rundenanzahl;
+    public int  anzahl_Autos;
+    public int rundenanzahl;
 
     public SimRace(int rundenanzahl,int anzahl_Autos){
         this.rundenanzahl=rundenanzahl;
@@ -13,17 +12,17 @@ public class SimRace {
     }
 
     public static void main(String[] args) {
-        SimRace test= new SimRace(10_000_000,10);
-        //SimRace test= new SimRace(10,7);
-        List <Car>autos= test.autosErstellen();
+        //SimRace test= new SimRace(10_000_000,7);
+        SimRace test= new SimRace(10,7);
+        List <Car>autos= test.autosErstellen(test);
         test.autosAufBahn(autos);
     }
 
-    public List<Car> autosErstellen(){
+    public List<Car> autosErstellen(SimRace sim){
         List<Car> autos= new ArrayList<>();
         for (int i=0;i<anzahl_Autos;i++){
             String name= "Wagen " +i;
-            Car car= new Car(name);
+            Car car= new Car(name,sim);
             car.start();
             autos.add(car);
         }
@@ -33,20 +32,6 @@ public class SimRace {
     public void autosAufBahn(List<Car> autos){
 
         long startTime = System.nanoTime();
-
-        //Anzahl an Runden entsprechend oft neue Rundenzeit berechnen und warten
-        for(int j=0;j<rundenanzahl;j++){
-            for(int i=0;i<autos.size();i++){
-                //System.out.println(autos.get(i).getName());
-                try {
-                    autos.get(i).sleep(autos.get(i).wartezeit);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
-                autos.get(i).setWartezeit((int)(Math.random() * ((100) + 1)));
-            }
-            //System.out.println("Runde "+j+" beendet");
-        }
         
         //Thread warten (alle im Ziel)
         try {
@@ -58,7 +43,7 @@ public class SimRace {
         }
 
         long usedTime = (System.nanoTime() - startTime)/1000000;
-        System.out.println("Gesamtzeit beträgt: "+usedTime);
+        System.out.println("Gesamtzeit (Ende-Anfang) beträgt: "+usedTime);
         konsolenAusgabe(autos);
     }
 
@@ -71,6 +56,6 @@ public class SimRace {
             gesamtzeit+=autos.get(i).gesamtzeit;
             System.out.println((i+1)+".Platz: "+autos.get(i).toString()+" Zeit:"+autos.get(i).gesamtzeit);
         }
-        System.out.println(gesamtzeit);
+        System.out.println("Gesamtzeit der Autos beträgt: "+gesamtzeit);
     }
 }

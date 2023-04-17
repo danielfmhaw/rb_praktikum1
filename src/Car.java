@@ -3,13 +3,21 @@ public class Car extends Thread implements Comparable {
     public int gesamtzeit;
     public String name;
 
-    public Car(String name){
+    private SimRace simRace;
+
+    public Car(String name,SimRace simRace){
         this.name=name;
+        this.simRace=simRace;
     }
     @Override
     public void run() {
-        if(!isInterrupted()){
-            //nothing
+        for(int i=0;i<simRace.rundenanzahl;i++){
+            try {
+                Thread.sleep(wartezeit);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            setWartezeit((int)(Math.random() * ((100) + 1)));
         }
     }
     public void setWartezeit(int wartezeit){
