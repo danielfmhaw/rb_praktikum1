@@ -1,0 +1,6 @@
+Das Problem ist offensichtlich, dass die Kassen von mehreren Kunden (Studenten) gleichzeitig benutzt werden,
+in der Realität kann aber nur ein Student pro Kasse in einer bestimmten Zeitraum bedient werden
+
+Alle gehen auch immer in die Kasse A (siehe Auszug aus Konsole):
+
+ --- Kassenliste   Kasse A:  7  Kasse B:  0  Kasse C:  0

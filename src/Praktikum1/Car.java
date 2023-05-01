@@ -1,3 +1,5 @@
+package Praktikum1;
+
 public class Car extends Thread implements Comparable {
     public int wartezeit;
     public int gesamtzeit;

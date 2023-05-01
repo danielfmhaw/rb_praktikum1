@@ -1,3 +1,5 @@
+package Praktikum1;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -12,8 +14,8 @@ public class SimRace {
     }
 
     public static void main(String[] args) {
-        //SimRace test= new SimRace(10_000_000,7);
-        SimRace test= new SimRace(10,7);
+        SimRace test= new SimRace(10_000_000,7);
+        //Praktikum1.SimRace test= new Praktikum1.SimRace(10,7);
         List <Car>autos= test.autosErstellen(test);
         test.autosAufBahn(autos);
     }
