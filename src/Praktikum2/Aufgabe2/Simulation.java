@@ -27,12 +27,12 @@ public class Simulation {
         raucher3.start();
 
         // Programm für 10 Sekunden laufen lassen
-        Thread.sleep(10000);
+        Thread.sleep(1000);
 
 
         System.out.println("");
         System.out.println("");
-        System.out.println("-------System unterbrochen!!!-------");
+        System.out.println("-------System gleich unterbrochen!!!-------");
 
 
         // Alle Threads beenden
@@ -42,11 +42,7 @@ public class Simulation {
         raucher2.interrupt();
         raucher3.interrupt();
 
-
     }
-
-
-
 
     public static void main(String args[])  {
         try {

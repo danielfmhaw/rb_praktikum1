@@ -1,6 +1,5 @@
 package Praktikum2.Aufgabe2;
 
-import java.util.List;
 import java.util.Random;
 
 public class Agent extends Thread{
@@ -15,13 +14,12 @@ public class Agent extends Thread{
     }
 
     public void run() {
-        while (!Thread.currentThread().isInterrupted()) {
-            synchronized (tisch) {
+        synchronized (tisch) {
+            while (!Thread.currentThread().isInterrupted()) {
                 while (tisch.istVoll()){
                     try {
                         tisch.wait();
                     } catch (InterruptedException e) {
-                        Thread.currentThread().interrupt();
                     }
                 }
                 int zahl1 = (int) (3 * Math.random());
@@ -37,6 +35,7 @@ public class Agent extends Thread{
 
                 tisch.put(zutat1, zutat2, name);
             }
+            System.out.println(name+ " ist interupted");
         }
     }
 }

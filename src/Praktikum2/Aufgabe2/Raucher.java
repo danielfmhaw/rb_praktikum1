@@ -30,13 +30,13 @@ public class Raucher extends Thread{
     }
 
     public void run() {
-        while (!Thread.currentThread().isInterrupted()) {
-            synchronized (tisch){
+        synchronized (tisch){
+            while (!Thread.currentThread().isInterrupted()) {
                 while (!tisch.istVoll()){
                     try {
                         tisch.wait();
                     } catch (InterruptedException e) {
-                        Thread.currentThread().interrupt();
+
                     }
                 }
                 tisch.take(benoetigteZutat1, benoetigteZutat2,name);
@@ -45,17 +45,14 @@ public class Raucher extends Thread{
                 try {
                     Thread.sleep(1000);
                 } catch (InterruptedException e) {
-                    Thread.currentThread().interrupt();
-                    System.out.println(name+ " wurde beim Zigaretten rauchen unterbrochen.");
+                    System.out.println(name+ " wurde beim Zigaretten rauchen unterbrochen (Sleep).");
                 }
 
                 System.out.println(name+ " hat das Rauchen beendet");
                 System.out.println();
                 System.out.println();
-
-                tisch.put(null, null,name);
-                tisch.notify();
             }
         }
+        System.out.println(name+ " ist interupted außer while() ");
     }
 }
